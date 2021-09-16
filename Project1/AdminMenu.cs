@@ -23,7 +23,6 @@ namespace Project1
             Console.WriteLine("1.   Add records");
             Console.WriteLine("2.   Update existing records");
             Console.WriteLine("3.   Delete records");
-            Console.WriteLine("4.   Read records");
             Console.WriteLine("-1.  Back");
             var choice = int.Parse(Console.ReadLine());
 
@@ -256,7 +255,6 @@ namespace Project1
             var choice = int.Parse(Console.ReadLine());
             string fileName = ChooseFile(choice);
 
-
             try
             {
                 Console.WriteLine("Enter the record number you wish to delete: ");
@@ -267,7 +265,7 @@ namespace Project1
                 File.WriteAllLines($"..//..//..//{fileName}", existing.ToArray());
 
                 Menu();
-            } catch(Exception e)
+            } catch(Exception)
             {
                 Console.WriteLine("An error has occured");
                 Delete();

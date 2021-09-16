@@ -84,11 +84,9 @@ namespace Project1
             Console.WriteLine("In addition to the two years at the University, below are the additional training I have done: ");
             foreach(var line in lines)
             {
-                var values = line.Split(',');
-                foreach (var v in values)
-                {
-                    Console.WriteLine($"- {v}");
-                }
+                
+                    Console.WriteLine($"- {line}");
+       
             }
 
             Console.WriteLine("___________________________");

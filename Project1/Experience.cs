@@ -56,7 +56,7 @@ namespace Project1
                         Console.WriteLine($"Start Month: {start}");
                         Console.WriteLine($"End Month: {end}");
                         Console.WriteLine($"Year: {year}");
-                        Console.WriteLine("Press Enter to go back to the Guest Menu");
+                        Program.GuestMenu();
                         Console.ReadLine();
                     }
 
@@ -65,7 +65,6 @@ namespace Project1
                 }
 
             }
-            Program.GuestMenu();
 
             Console.ReadLine();
 

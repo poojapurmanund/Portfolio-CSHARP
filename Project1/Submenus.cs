@@ -82,6 +82,7 @@ namespace Project1
 
         public static void DisplayTSkills()
         {
+            Console.Clear();
             Dictionary<int, string> tech = new Dictionary<int, string>();
 
             try
