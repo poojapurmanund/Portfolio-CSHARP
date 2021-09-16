@@ -7,7 +7,10 @@ namespace Project1
     class Program
     {
 
-        enum selection {experience=1, education=2,skills=3,technology=4,contact=5,back=-1};
+        enum selection { experience = 1, education = 2, skills = 3, technology = 4, contact = 5, back = -1 };
+        enum company { ceridian = 1, tenEleven = 2, back = -1 };
+        enum uni { year1 = 1, year2 = 2, additionalTraining = 3, back = -1 }
+
         //implement class and interface for experience
         //education
         //admin mode
@@ -22,6 +25,7 @@ namespace Project1
 
         public static void MainMenu()
         {
+            Console.Clear();
             char choice;
 
             //main menu for guest or admin choice
@@ -41,7 +45,7 @@ namespace Project1
                     OpenAdmin();
                     break;
                 default:
-                    Console.WriteLine("Error. Please enter G or A");
+                    Console.WriteLine("Error. Please enter G(Guest) or A(Admin)");
                     MainMenu();
                     break;
             }
@@ -58,10 +62,14 @@ namespace Project1
         }
 
         //function for the admin mode
+
         public static void OpenAdmin()
         {
-
+            AdminMenu a = new AdminMenu();
+            a.Menu();
         }
+         
+        
 
         //function to display an intro in the guest mode
         public static void DisplayIntro()
@@ -134,22 +142,24 @@ namespace Project1
 
             Experience e = new Experience();
 
-            Console.Clear();
-
             Console.WriteLine("This is the experience section.");
             int choice;
             Console.WriteLine("Below are the job experiences I have had. Select (1 or 2) to learn more about the company: ");
-            Console.WriteLine("1. Company XYZ");
-            Console.WriteLine("2. Ceridian");
+            Console.WriteLine("1. Ceridian");
+            Console.WriteLine("2. Ten Eleven Spare Parts");
+            Console.WriteLine("-1. Back");
             choice = int.Parse(Console.ReadLine());
 
             switch (choice)
             {
-                case 1:
-                    //TenEleven();
-                    break;
-                case 2:
+                case (int)company.ceridian:
                     e.Ceridian();
+                    break;
+                case (int)company.tenEleven:
+                    e.TenEleven();
+                    break;
+                case (int)company.back:
+                    GuestMenu();
                     break;
                 default:
                     Console.WriteLine("Error. Please select 1 or 2 only.");
@@ -164,24 +174,33 @@ namespace Project1
 
         public static void EducationMenu()
         {
+           
+            Education e = new Education();
             int choice;
             Console.WriteLine("This is the Education Section.");
-            Console.WriteLine("Select the Year (1, 2 or 3) to learn about the modules and projects.");
+            Console.WriteLine("Select the Year (1, 2) to learn about the modules and projects, or 3 for any additional training.");
             Console.WriteLine("Year 1: 6 Modules");
             Console.WriteLine("Year 2: 6 Modules");
-            Console.WriteLine("Year 3: 3 Modules");
+            Console.WriteLine("Option 3: Additional Training");
+            Console.WriteLine("-1: Back");
             choice = int.Parse(Console.ReadLine());
 
             switch (choice)
             {
-                case 1:
-                    //Year1();
+                case (int)uni.year1:
+                    e.DisplayYear((int)uni.year1);
                     break;
-                case 2:
+                case (int)uni.year2:
+                    e.DisplayYear((int)uni.year2);
                     break;
-                case 3:
+                case (int)uni.additionalTraining:
+                    e.AdditionalTraining();
+                    break;
+                case (int)uni.back:
+                    GuestMenu();
                     break;
                 default:
+                    Console.WriteLine("Error. Select again: ");
                     EducationMenu();
                     break;
             }
@@ -196,7 +215,7 @@ namespace Project1
 
             try
             {
-                var lines = File.ReadAllLines("pskills.csv");
+                var lines = File.ReadAllLines("..//..//..//pskills.csv");
                 var values = lines[0].Split(',');
                 foreach (var v in values)
                 {
@@ -214,8 +233,9 @@ namespace Project1
             {
                 Console.WriteLine("- " + x);
             }
-            Console.ReadKey();
             GuestMenu();
+
+            Console.ReadKey();
         }
 
         public static void DisplayTSkills()
@@ -224,7 +244,7 @@ namespace Project1
 
             try
             {
-                var lines = File.ReadAllLines("tskills.csv");
+                var lines = File.ReadAllLines("..//..//..//tskills.csv");
 
 
                 var values = lines[0].Split(',');
@@ -251,22 +271,23 @@ namespace Project1
             {
                 Console.WriteLine("File not found");
             }
+            
+            GuestMenu();
+            Console.ReadLine();
 
         }
 
 
-        /*
-         edit this
-        */
         public static void DisplayContact()
         {
+            Console.Clear();
             //dictionary to store the contact details
             Dictionary<string, string> contact = new Dictionary<string, string>();
 
             //try to open file
             try
             {
-                var lines = File.ReadAllLines("contact.csv");
+                var lines = File.ReadAllLines("..//..//..//contact.csv");
 
                 foreach (var line in lines)
                 {
@@ -289,6 +310,10 @@ namespace Project1
             {
                 Console.WriteLine("{0} : {1}", value.Key, value.Value);
             }
+
+            
+            GuestMenu();
+            Console.ReadLine();
         }
 
 
