@@ -39,8 +39,9 @@ namespace Project1
                         Console.WriteLine($"- {value}");
                     }
 
-                    Program.EducationMenu();
+                    Submenus.EducationMenu();
                     Console.ReadLine();
+
                     break;
 
                 case 2:
@@ -68,7 +69,8 @@ namespace Project1
                         Console.WriteLine($"- {value}");
                     }
 
-                    Program.EducationMenu();
+                    Console.WriteLine("___________________________");
+                    Submenus.EducationMenu();
                     Console.ReadLine();
                     break;
             }
@@ -91,7 +93,8 @@ namespace Project1
                 }
             }
 
-            Program.EducationMenu();
+            Console.WriteLine("___________________________");
+            Submenus.EducationMenu();
             Console.ReadLine();
 
         }

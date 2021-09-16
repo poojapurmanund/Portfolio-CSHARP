@@ -15,8 +15,7 @@ namespace Project1
         public void SelectCompany()
         {
             Console.Clear();
-            Console.WriteLine("This is the experience section.");
-            //i.e: the first company in the file is ceridian, hence the index 0
+            Console.WriteLine("This section elaborates on my work experience.");
             var lines = File.ReadAllLines("..//..//..//companies.csv");
             Console.WriteLine("Select the company to learn more about by typing in the name: ");
             foreach (var l in lines)
