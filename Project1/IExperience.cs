@@ -8,7 +8,7 @@ namespace Project1
     //using interface to implement solid principle - SRP
     interface IExperience
     {
-         void Ceridian();
-         void TenEleven();
+         void SelectCompany();
+         void DisplayCompany(string c);
     }
 }

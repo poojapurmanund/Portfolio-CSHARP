@@ -142,34 +142,8 @@ namespace Project1
 
             Experience e = new Experience();
 
-            Console.WriteLine("This is the experience section.");
-            int choice;
-            Console.WriteLine("Below are the job experiences I have had. Select (1 or 2) to learn more about the company: ");
-            Console.WriteLine("1. Ceridian");
-            Console.WriteLine("2. Ten Eleven Spare Parts");
-            Console.WriteLine("-1. Back");
-            choice = int.Parse(Console.ReadLine());
-
-            switch (choice)
-            {
-                case (int)company.ceridian:
-                    e.Ceridian();
-                    break;
-                case (int)company.tenEleven:
-                    e.TenEleven();
-                    break;
-                case (int)company.back:
-                    GuestMenu();
-                    break;
-                default:
-                    Console.WriteLine("Error. Please select 1 or 2 only.");
-                    ExperienceMenu();
-                    Console.ReadLine();
-                    break;
-
-
-
-            }
+            e.SelectCompany();
+            
         }
 
         public static void EducationMenu()
@@ -249,14 +223,11 @@ namespace Project1
 
                 var values = lines[0].Split(',');
 
-                tech.Add(0, values[0]);
-                tech.Add(1, values[1]);
-                tech.Add(2, values[2]);
-                tech.Add(3, values[3]);
-                tech.Add(4, values[4]);
-                tech.Add(5, values[5]);
-                tech.Add(6, values[6]);
-                tech.Add(7, values[7]);
+                int i = 0;
+                foreach(var v in values)
+                {
+                    tech.Add(i, v);
+                }
 
                 //outputting
                 Console.WriteLine("--PROGRAMMING AND WEB SKILLS--");
@@ -281,8 +252,6 @@ namespace Project1
         public static void DisplayContact()
         {
             Console.Clear();
-            //dictionary to store the contact details
-            Dictionary<string, string> contact = new Dictionary<string, string>();
 
             //try to open file
             try
@@ -292,23 +261,18 @@ namespace Project1
                 foreach (var line in lines)
                 {
                     var values = line.Split(',');
-                    contact.Add("Phone Number:", values[0]);
-                    contact.Add("Home Number:", values[1]);
-                    contact.Add("Address:", values[2]);
-                    contact.Add("Email Address:", values[3]);
+                    Console.WriteLine("Contact details:");
+                    foreach(var v in values)
+                    {
+                        Console.WriteLine(v);
+                    }
+          
+
                 }
             }
             catch (FileNotFoundException)
             {
                 Console.WriteLine("File not found");
-            }
-
-            Console.WriteLine("*************");
-            Console.WriteLine("Contact details:");
-
-            foreach (KeyValuePair<string, string> value in contact)
-            {
-                Console.WriteLine("{0} : {1}", value.Key, value.Value);
             }
 
             

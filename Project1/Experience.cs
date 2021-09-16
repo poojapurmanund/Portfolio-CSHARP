@@ -5,78 +5,68 @@ using System.Text;
 
 namespace Project1
 {
-    class Experience:IExperience
+    class Experience : IExperience
     {
         private string companyName;
         private string companyDesc;
         private string start, end;
         private int year;
 
-
-
-        public void Ceridian()
+        public void SelectCompany()
         {
             Console.Clear();
+            Console.WriteLine("This is the experience section.");
             //i.e: the first company in the file is ceridian, hence the index 0
             var lines = File.ReadAllLines("..//..//..//companies.csv");
-
-            //check if there is data in the file
-            if (lines[0] == "")
+            Console.WriteLine("Select the company to learn more about by typing in the name: ");
+            foreach (var l in lines)
             {
-                Console.WriteLine("No information available");
+                var value = l.Split(',');
+                Console.WriteLine($"-{value[0]}");
             }
-            else
-            {
-                var values = lines[0].Split(',');
-                companyName = values[0];
-                companyDesc = values[1];
-                start = values[2];
-                end = values[3];
-                year = int.Parse(values[4]);
-            }
-
-            Console.WriteLine($"Company Name: {companyName}");
-            Console.WriteLine($"Company Description: {companyDesc}");
-            Console.WriteLine($"Start Month: {start}");
-            Console.WriteLine($"End Month: {end}");
-            Console.WriteLine($"Year: {year}");
-
-
-            Program.ExperienceMenu();
-
-            Console.ReadLine();
+            var choice = Console.ReadLine().ToLower();
+            DisplayCompany(choice);
 
         }
 
-        public void TenEleven()
+        public void DisplayCompany(string choice)
         {
-            Console.Clear();
-            //i.e: the second company in the file is ten eleven, hence the index 1
-            var lines = File.ReadAllLines("..//..//..//companies.csv");
 
             //check if there is data in the file
-            if (lines[1] == "")
+            var lines = File.ReadAllLines("..//..//..//companies.csv");
+            foreach (var line in lines)
             {
-                Console.WriteLine("No information available");
+                if (line == "")
+                {
+                    Console.WriteLine("No information available");
+                }
+                else
+                {
+                    var values = line.Split(',');
+                    companyName = (string)values[0];
+                    companyDesc = values[1];
+                    start = values[2];
+                    end = values[3];
+                    year = int.Parse(values[4]);
+
+                    if (companyName.Equals(choice, StringComparison.InvariantCultureIgnoreCase))
+                    {
+                        //display info about the company
+                        Console.WriteLine($"Company Name: {companyName}");
+                        Console.WriteLine($"Company Description: {companyDesc}");
+                        Console.WriteLine($"Start Month: {start}");
+                        Console.WriteLine($"End Month: {end}");
+                        Console.WriteLine($"Year: {year}");
+                        Console.WriteLine("Press Enter to go back to the Guest Menu");
+                        Console.ReadLine();
+                    }
+
+                        
+                    
+                }
+
             }
-            else
-            {
-                var values = lines[1].Split(',');
-                companyName = values[0];
-                companyDesc = values[1];
-                start = values[2];
-                end = values[3];
-                year = int.Parse(values[4]);
-            }
-
-            Console.WriteLine($"Company Name: {companyName}");
-            Console.WriteLine($"Company Description: {companyDesc}");
-            Console.WriteLine($"Start Month: {start}");
-            Console.WriteLine($"End Month: {end}");
-            Console.WriteLine($"Year: {year}");
-
-            Program.ExperienceMenu();
-
+            Program.GuestMenu();
 
             Console.ReadLine();
 
