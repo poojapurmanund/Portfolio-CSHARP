@@ -23,6 +23,7 @@ namespace Project1
             Console.WriteLine("1.   Add records");
             Console.WriteLine("2.   Update existing records");
             Console.WriteLine("3.   Delete records");
+            Console.WriteLine("4.   Read records");
             Console.WriteLine("-1.  Back");
             var choice = int.Parse(Console.ReadLine());
 
@@ -39,6 +40,9 @@ namespace Project1
                     break;
                 case (int)menu.back:
                     Program.MainMenu();
+                    break;
+                default:
+                    Menu();
                     break;
             }
         }
@@ -252,27 +256,23 @@ namespace Project1
             var choice = int.Parse(Console.ReadLine());
             string fileName = ChooseFile(choice);
 
-            switch (choice)
+
+            try
             {
-                case (int)files.AdditionalTraining:
-                    Console.WriteLine("Enter the record number for the training you wish to delete: ");
-                    int record = int.Parse(Console.ReadLine());
-                    String[] lines = File.ReadAllLines($"..//..//..//{fileName}");
-                    List<string> existing = new List<string>(lines);
-                    existing.RemoveAt(record - 1);
-                    File.WriteAllLines($"..//..//..//{fileName}", existing.ToArray());
-                    break;
+                Console.WriteLine("Enter the record number you wish to delete: ");
+                int record = int.Parse(Console.ReadLine());
+                String[] lines = File.ReadAllLines($"..//..//..//{fileName}");
+                List<string> existing = new List<string>(lines);
+                existing.RemoveAt(record - 1);
+                File.WriteAllLines($"..//..//..//{fileName}", existing.ToArray());
 
-                case (int)files.Companies:
-                    Console.WriteLine("Enter the record number for the company you wish to delete: ");
-                    record = int.Parse(Console.ReadLine());
-                    lines = File.ReadAllLines($"..//..//..//{fileName}");
-                    existing = new List<string>(lines);
-                    existing.RemoveAt(record - 1);
-                    File.WriteAllLines($"..//..//..//{fileName}", existing.ToArray());
-                    break;
+                Menu();
+            } catch(Exception e)
+            {
+                Console.WriteLine("An error has occured");
+                Delete();
             }
-
+            
 
 
         }
