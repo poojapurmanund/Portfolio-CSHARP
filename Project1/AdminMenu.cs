@@ -81,8 +81,11 @@ namespace Project1
             //add function for additional training
             if (choice == (int)files.AdditionalTraining)
             {
-                Console.WriteLine("Enter the additional training details: ");
-                newLine = Console.ReadLine();
+                Console.WriteLine("Enter the training name: ");
+                string tName = Console.ReadLine();
+                Console.WriteLine("Enter the training description: ");
+                string tDesc = Console.ReadLine();
+                newLine = $"{tName} : {tDesc}";
             }
             else if (choice == (int)files.Companies)
             {
@@ -127,6 +130,31 @@ namespace Project1
             Console.ReadLine();
         }
 
+        public void UpdateFunction(int record,string fileName,string newData)
+        {
+            var lines = File.ReadAllLines($"..//..//..//{fileName}");
+            //create new temporary file for editing purposes
+            string newFile = "test.csv";
+            for (int i = 0; i < lines.Length; i++)
+            {
+                //update necessary record
+                if (i == record - 1)
+                {
+                    File.AppendAllText(newFile, $"{newData}\n");
+                }
+                else
+                //else just re-enter the old data
+                {
+                    File.AppendAllText(newFile, $"{lines[i]}\n");
+                }
+            }
+            File.Delete($"..//..//..//{fileName}");
+            File.Move(newFile, $"..//..//..//{fileName}");
+
+            Menu();
+        }
+        
+
         public void Update()
         {
             Console.Clear();
@@ -138,37 +166,77 @@ namespace Project1
             Console.WriteLine("5. Technological Skills");
             var choice = int.Parse(Console.ReadLine());
             string fileName = ChooseFile(choice);
+            int record = 0;
+            var newData = "";
 
             switch (choice)
             {
                 case (int)files.AdditionalTraining:
                     Console.WriteLine("Enter the record number you wish to edit: ");
-                    int record = int.Parse(Console.ReadLine());
-                    var lines = File.ReadAllLines($"..//..//..//{fileName}");
-                    //create new temporary file for editing purposes
-                    string newFile = "test.csv";
+                    record = int.Parse(Console.ReadLine());
+                    
 
-                    Console.WriteLine("Enter new training details for that record: ");
-                    var newData = Console.ReadLine();
+                    Console.WriteLine("Enter new training name: ");
+                    var trainingName = Console.ReadLine();
+                    Console.WriteLine("Enter new training description: ");
+                    var description = Console.ReadLine();
+                     newData = $"{trainingName} : {description}";
+
+                break;
+
+                case (int)files.Companies:
+                    Console.WriteLine("Enter the record number you wish to edit: ");
+                    record = int.Parse(Console.ReadLine());
 
 
-                    for (int i = 0; i < lines.Length; i++)
-                    {
-                        //update necessary record
-                        if (i == record - 1)
-                        {
-                            File.AppendAllText(newFile, $"{newData}\n");
-                        }
-                        else
-                        //else just re-enter the old data
-                        {
-                            File.AppendAllText(newFile, $"{lines[i]}\n");
-                        }
-                    }
-                    File.Delete($"..//..//..//{fileName}");
-                    File.Move(newFile, $"..//..//..//{fileName}");
+                    Console.WriteLine("Enter the company name: ");
+                    string name = Console.ReadLine();
+                    Console.WriteLine("Enter the company description: ");
+                    string desc = Console.ReadLine();
+                    Console.WriteLine("Enter the starting month: ");
+                    string sMonth = Console.ReadLine();
+                    Console.WriteLine("Enter the ending month: ");
+                    string eMonth = Console.ReadLine();
+                    Console.WriteLine("Enter the year: ");
+                    int year = int.Parse(Console.ReadLine());
+                    newData = $"{name},{desc},{sMonth},{eMonth},{year}";
+
                     break;
+
+                case (int)files.Contact:
+                    Console.WriteLine("Enter the record number you wish to edit: ");
+                    record = int.Parse(Console.ReadLine());
+
+
+                    Console.WriteLine("Enter the new contact details:");
+                    newData = Console.ReadLine();
+
+                    break;
+
+                case (int)files.PersonalSkills:
+                    Console.WriteLine("Enter the record number you wish to edit: ");
+                    record = int.Parse(Console.ReadLine());
+
+
+                    Console.WriteLine("Enter a new personal skill to update:");
+                    newData = Console.ReadLine();
+
+                    break;
+
+                case (int)files.TechSkills:
+                    Console.WriteLine("Enter the record number you wish to edit: ");
+                    record = int.Parse(Console.ReadLine());
+
+
+                    Console.WriteLine("Enter a new tech skill to update:");
+                    newData = Console.ReadLine();
+
+                    break;
+
+
             }
+            UpdateFunction(record,fileName, newData);
+
 
         }
 

@@ -74,8 +74,6 @@ namespace Project1
                     Console.ReadLine();
                     break;
             }
-
-            
             
         }
 
