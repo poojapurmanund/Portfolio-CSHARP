@@ -76,6 +76,7 @@ namespace Project1
             Console.WriteLine("-1: Back");
             choice = int.Parse(Console.ReadLine());
 
+            //the user chooses which data he wishes to display
             switch (choice)
             {
                 case (int)uni.year1:
@@ -142,7 +143,7 @@ namespace Project1
                     tech.Add(i++, line);
                 }
 
-                //outputting
+
                 Console.WriteLine("--PROGRAMMING AND WEB SKILLS--");
                 foreach (KeyValuePair<int, string> value in tech)
                 {
@@ -160,9 +161,6 @@ namespace Project1
             Console.ReadLine();
 
         }
-
-
-
 
         public static void DisplayContact()
         {

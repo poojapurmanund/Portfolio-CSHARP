@@ -117,7 +117,6 @@ namespace Project1
                      parseSuccess = int.TryParse(yearAsString, out year);
                 }
                     
-
                 newLine = $"{name},{desc},{sMonth},{eMonth},{year}";
             }
             else if (choice == (int)files.Contact)
@@ -208,7 +207,6 @@ namespace Project1
                         recordString = Console.ReadLine();
                         parseSuccess = int.TryParse(recordString, out record);
                     }
-
 
                     Console.WriteLine("Enter new training name: ");
                     var trainingName = Console.ReadLine();
