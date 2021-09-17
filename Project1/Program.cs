@@ -7,7 +7,6 @@ namespace Project1
     class Program
     {
         enum company { ceridian = 1, tenEleven = 2, back = -1 };
-        
         static void Main(string[] args)
         {
             MainMenu();
@@ -74,11 +73,6 @@ namespace Project1
             }
             Submenus.GuestMenu();
         }
-
-        //function for the guest menu
-        
-
-
 
     }
 }
