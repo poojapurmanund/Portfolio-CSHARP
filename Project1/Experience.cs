@@ -41,6 +41,7 @@ namespace Project1
                 }
                 else
                 {
+                    //all the different data are separated with commas, hence we separate them for display
                     var values = line.Split(',');
                     companyName = (string)values[0];
                     companyDesc = values[1];
@@ -56,7 +57,7 @@ namespace Project1
                         Console.WriteLine($"Start Month: {start}");
                         Console.WriteLine($"End Month: {end}");
                         Console.WriteLine($"Year: {year}");
-                        Program.GuestMenu();
+                        Submenus.GuestMenu();
                         Console.ReadLine();
                     }
 

@@ -7,7 +7,54 @@ namespace Project1
 {
     class Submenus
     {
+        enum selection { experience = 1, education = 2, skills = 3, technology = 4, contact = 5, back = -1 };
         enum uni { year1 = 1, year2 = 2, additionalTraining = 3, back = -1 }
+
+        public static void GuestMenu()
+        {
+            int choice = -1;
+
+            Console.WriteLine("*************");
+            Console.WriteLine("Choose an option below:");
+            Console.WriteLine("1. Experience/Job History");
+            Console.WriteLine("2. Education/Training");
+            Console.WriteLine("3. Skills");
+            Console.WriteLine("4. Technology Skills");
+            Console.WriteLine("5. Contact Details");
+            Console.WriteLine("-1. Back");
+            Console.WriteLine("*************");
+
+            choice = int.Parse(Console.ReadLine());
+            switch (choice)
+            {
+                case (int)selection.experience:
+                    Submenus.ExperienceMenu();
+                    break;
+
+                case (int)selection.education:
+                    Submenus.EducationMenu();
+                    break;
+
+                case (int)selection.skills:
+                    Submenus.DisplayPSkills();
+                    break;
+
+                case (int)selection.technology:
+                    Submenus.DisplayTSkills();
+                    break;
+
+                case (int)selection.contact:
+                    Submenus.DisplayContact();
+                    break;
+
+                case (int)selection.back:
+                    Program.MainMenu();
+                    break;
+
+
+            }
+
+        }
         public static void ExperienceMenu()
         {
             Experience e = new Experience();
@@ -41,7 +88,7 @@ namespace Project1
                     e.AdditionalTraining();
                     break;
                 case (int)uni.back:
-                    Program.GuestMenu();
+                    Submenus.GuestMenu();
                     break;
                 default:
                     Console.WriteLine("Error. Select again: ");
@@ -75,7 +122,7 @@ namespace Project1
 
             pskills.ForEach(x => { Console.WriteLine("- " + x); });
             
-            Program.GuestMenu();
+            Submenus.GuestMenu();
 
             Console.ReadKey();
         }
@@ -109,7 +156,7 @@ namespace Project1
                 Console.WriteLine("File not found");
             }
 
-            Program.GuestMenu();
+            Submenus.GuestMenu();
             Console.ReadLine();
 
         }
@@ -133,7 +180,6 @@ namespace Project1
                    
                     Console.WriteLine(line);
 
-
                 }
             }
             catch (FileNotFoundException)
@@ -141,8 +187,7 @@ namespace Project1
                 Console.WriteLine("File not found");
             }
 
-
-            Program.GuestMenu();
+            Submenus.GuestMenu();
             Console.ReadLine();
         }
     }

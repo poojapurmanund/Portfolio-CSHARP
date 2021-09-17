@@ -6,8 +6,6 @@ namespace Project1
 {
     class Program
     {
-
-        enum selection { experience = 1, education = 2, skills = 3, technology = 4, contact = 5, back = -1 };
         enum company { ceridian = 1, tenEleven = 2, back = -1 };
         
         static void Main(string[] args)
@@ -74,55 +72,11 @@ namespace Project1
                 Console.WriteLine($"Hello. My name is {values[0]} {values[1]}, I am a Software Engineering Student at the {values[2]}");
 
             }
-            GuestMenu();
+            Submenus.GuestMenu();
         }
 
         //function for the guest menu
-        public static void GuestMenu()
-        {
-            int choice = -1;
-
-            Console.WriteLine("*************");
-            Console.WriteLine("Choose an option below:");
-            Console.WriteLine("1. Experience/Job History");
-            Console.WriteLine("2. Education/Training");
-            Console.WriteLine("3. Skills");
-            Console.WriteLine("4. Technology Skills");
-            Console.WriteLine("5. Contact Details");
-            Console.WriteLine("-1. Back");
-            Console.WriteLine("*************");
-
-            choice = int.Parse(Console.ReadLine());
-            switch (choice)
-            {
-                case (int)selection.experience :
-                    Submenus.ExperienceMenu();
-                    break;
-
-                case (int)selection.education:
-                    Submenus.EducationMenu();
-                    break;
-
-                case (int)selection.skills:
-                    Submenus.DisplayPSkills();
-                    break;
-
-                case (int)selection.technology:
-                    Submenus.DisplayTSkills();
-                    break;
-
-                case (int)selection.contact:
-                    Submenus.DisplayContact();
-                    break;
-
-                case (int)selection.back:
-                    MainMenu();
-                    break;
-
-
-            }
-
-        }
+        
 
 
 

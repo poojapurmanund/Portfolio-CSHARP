@@ -8,7 +8,7 @@ namespace Project1
     class AdminMenu
     {
         enum files { AdditionalTraining = 1, Companies = 2, Contact = 3, PersonalSkills = 4, TechSkills = 5 };
-        enum menu { add = 1, update = 2, delete = 3, back = -1 };
+        enum menu { add = 1, update = 2, delete = 3, read=4,back = -1 };
         public void Menu()
         {
             Console.Clear();
@@ -23,6 +23,7 @@ namespace Project1
             Console.WriteLine("1.   Add records");
             Console.WriteLine("2.   Update existing records");
             Console.WriteLine("3.   Delete records");
+            Console.WriteLine("4.   Read records");
             Console.WriteLine("-1.  Back");
             var choice = int.Parse(Console.ReadLine());
 
@@ -37,6 +38,10 @@ namespace Project1
                 case (int)menu.delete:
                     Delete();
                     break;
+                case (int)menu.read:
+                    Read();
+                    break;
+
                 case (int)menu.back:
                     Program.MainMenu();
                     break;
@@ -66,7 +71,7 @@ namespace Project1
             }
         }
 
-
+        //add function appends a new line i.e record to the files
         public void Add()
         {
             Console.Clear();
@@ -81,7 +86,6 @@ namespace Project1
 
 
             string newLine = "";
-            //add function for additional training
             if (choice == (int)files.AdditionalTraining)
             {
                 Console.WriteLine("Enter the training name: ");
@@ -101,7 +105,19 @@ namespace Project1
                 Console.WriteLine("Enter the ending month: ");
                 string eMonth = Console.ReadLine();
                 Console.WriteLine("Enter the year: ");
-                int year = int.Parse(Console.ReadLine());
+                var yearAsString = Console.ReadLine();
+
+                int year;
+                bool parseSuccess = int.TryParse(yearAsString, out year);
+
+                while (!parseSuccess)
+                {
+                    Console.WriteLine("Error: please enter a number");
+                     yearAsString = Console.ReadLine();
+                     parseSuccess = int.TryParse(yearAsString, out year);
+                }
+                    
+
                 newLine = $"{name},{desc},{sMonth},{eMonth},{year}";
             }
             else if (choice == (int)files.Contact)
@@ -120,7 +136,6 @@ namespace Project1
                 newLine = Console.ReadLine();
             }
 
-
             if (fileName == "")
             {
                 Console.WriteLine("Error");
@@ -128,6 +143,9 @@ namespace Project1
             }
 
             File.AppendAllText($"..//..//..//{fileName}", $"\n{newLine}");
+
+            //to check if data was added successfully, read file again
+            Read();
             
             Menu();
             Console.ReadLine();
@@ -154,10 +172,13 @@ namespace Project1
             File.Delete($"..//..//..//{fileName}");
             File.Move(newFile, $"..//..//..//{fileName}");
 
+            //to check for successful update, read the file again
+            Read();
+
             Menu();
         }
         
-
+        //the update function is used to edit the data for existing records in the files
         public void Update()
         {
             Console.Clear();
@@ -169,15 +190,25 @@ namespace Project1
             Console.WriteLine("5. Technological Skills");
             var choice = int.Parse(Console.ReadLine());
             string fileName = ChooseFile(choice);
-            int record = 0;
             var newData = "";
+
+            int record = 0;
 
             switch (choice)
             {
                 case (int)files.AdditionalTraining:
                     Console.WriteLine("Enter the record number you wish to edit: ");
-                    record = int.Parse(Console.ReadLine());
-                    
+                    var recordString = Console.ReadLine();
+
+                    bool parseSuccess = int.TryParse(recordString, out record);
+
+                    while (!parseSuccess)
+                    {
+                        Console.WriteLine("Error: please enter a number");
+                        recordString = Console.ReadLine();
+                        parseSuccess = int.TryParse(recordString, out record);
+                    }
+
 
                     Console.WriteLine("Enter new training name: ");
                     var trainingName = Console.ReadLine();
@@ -189,7 +220,16 @@ namespace Project1
 
                 case (int)files.Companies:
                     Console.WriteLine("Enter the record number you wish to edit: ");
-                    record = int.Parse(Console.ReadLine());
+                     recordString = Console.ReadLine();
+
+                     parseSuccess = int.TryParse(recordString, out record);
+
+                    while (!parseSuccess)
+                    {
+                        Console.WriteLine("Error: please enter a number");
+                        recordString = Console.ReadLine();
+                        parseSuccess = int.TryParse(recordString, out record);
+                    }
 
 
                     Console.WriteLine("Enter the company name: ");
@@ -201,14 +241,33 @@ namespace Project1
                     Console.WriteLine("Enter the ending month: ");
                     string eMonth = Console.ReadLine();
                     Console.WriteLine("Enter the year: ");
-                    int year = int.Parse(Console.ReadLine());
+                    var yearAsString = Console.ReadLine();
+
+                    int year;
+                    parseSuccess = int.TryParse(yearAsString, out year);
+
+                    while (!parseSuccess)
+                    {
+                        Console.WriteLine("Error: please enter a number");
+                        yearAsString = Console.ReadLine();
+                        parseSuccess = int.TryParse(yearAsString, out year);
+                    }
                     newData = $"{name},{desc},{sMonth},{eMonth},{year}";
 
                     break;
 
                 case (int)files.Contact:
                     Console.WriteLine("Enter the record number you wish to edit: ");
-                    record = int.Parse(Console.ReadLine());
+                    recordString = Console.ReadLine();
+
+                    parseSuccess = int.TryParse(recordString, out record);
+
+                    while (!parseSuccess)
+                    {
+                        Console.WriteLine("Error: please enter a number");
+                        recordString = Console.ReadLine();
+                        parseSuccess = int.TryParse(recordString, out record);
+                    }
 
 
                     Console.WriteLine("Enter the new contact details:");
@@ -218,7 +277,16 @@ namespace Project1
 
                 case (int)files.PersonalSkills:
                     Console.WriteLine("Enter the record number you wish to edit: ");
-                    record = int.Parse(Console.ReadLine());
+                    recordString = Console.ReadLine();
+
+                    parseSuccess = int.TryParse(recordString, out record);
+
+                    while (!parseSuccess)
+                    {
+                        Console.WriteLine("Error: please enter a number");
+                        recordString = Console.ReadLine();
+                        parseSuccess = int.TryParse(recordString, out record);
+                    }
 
 
                     Console.WriteLine("Enter a new personal skill to update:");
@@ -228,7 +296,16 @@ namespace Project1
 
                 case (int)files.TechSkills:
                     Console.WriteLine("Enter the record number you wish to edit: ");
-                    record = int.Parse(Console.ReadLine());
+                    recordString = Console.ReadLine();
+
+                    parseSuccess = int.TryParse(recordString, out record);
+
+                    while (!parseSuccess)
+                    {
+                        Console.WriteLine("Error: please enter a number");
+                        recordString = Console.ReadLine();
+                        parseSuccess = int.TryParse(recordString, out record);
+                    }
 
 
                     Console.WriteLine("Enter a new tech skill to update:");
@@ -264,6 +341,9 @@ namespace Project1
                 existing.RemoveAt(record - 1);
                 File.WriteAllLines($"..//..//..//{fileName}", existing.ToArray());
 
+                //to check if record was deleted; read the file again
+                Read();
+
                 Menu();
             } catch(Exception)
             {
@@ -271,8 +351,36 @@ namespace Project1
                 Delete();
             }
             
+        }
 
+        public void Read()
+        {
+            Console.Clear();
+            Console.WriteLine("Which file do you wish to read from?");
+            Console.WriteLine("1. Additional Training");
+            Console.WriteLine("2. Companies/Experience");
+            Console.WriteLine("3. Contact");
+            Console.WriteLine("4. Personal Skills");
+            Console.WriteLine("5. Technological Skills");
+            var choice = int.Parse(Console.ReadLine());
+            string fileName = ChooseFile(choice);
 
+            try
+            {
+                var lines = File.ReadAllLines($"..//..//..//{fileName}");
+                foreach(var l in lines)
+                {
+                    Console.WriteLine(l);
+                }
+                
+            }
+            catch (Exception)
+            {
+                Console.WriteLine("Error");
+            }
+
+            ChooseOperation();
+            Console.ReadLine();
         }
     }
 }
