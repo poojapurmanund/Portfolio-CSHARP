@@ -5,32 +5,67 @@ using System.Text;
 
 namespace Project1
 {
-    class Experience
+    class Experience : IExperience
     {
         private string companyName;
         private string companyDesc;
         private string start, end;
         private int year;
 
-        public void Ceridian()
+        public void SelectCompany()
         {
             Console.Clear();
-            //i.e: the first company in the file is ceridian, hence the index 0
-            var lines = File.ReadAllLines("ceridian.csv");
+            Console.WriteLine("This section elaborates on my work experience.");
+            var lines = File.ReadAllLines("..//..//..//companies.csv");
+            Console.WriteLine("Select the company to learn more about by typing in the name: ");
+            foreach (var l in lines)
+            {
+                var value = l.Split(',');
+                Console.WriteLine($"-{value[0]}");
+            }
+            var choice = Console.ReadLine().ToLower();
+            DisplayCompany(choice);
+
+        }
+
+        public void DisplayCompany(string choice)
+        {
 
             //check if there is data in the file
-            if (lines[0] == "")
+            var lines = File.ReadAllLines("..//..//..//companies.csv");
+            foreach (var line in lines)
             {
-                Console.WriteLine("No information available");
-            }
-            else
-            {
-                var values = lines[0].Split(',');
-                Console.WriteLine(values[0] + " is a " + values[1] + " company. I started an internship programme " +
-                        "for the position of a " + values[2] + " starting from " + values[3] + " and ending in " + values[4] + ". The" +
-                        "main programming language we are being taught is " + values[5]);
-            }
+                if (line == "")
+                {
+                    Console.WriteLine("No information available");
+                }
+                else
+                {
+                    //all the different data are separated with commas, hence we separate them for display
+                    var values = line.Split(',');
+                    companyName = (string)values[0];
+                    companyDesc = values[1];
+                    start = values[2];
+                    end = values[3];
+                    year = int.Parse(values[4]);
 
+                    if (companyName.Equals(choice, StringComparison.InvariantCultureIgnoreCase))
+                    {
+                        //display info about the company
+                        Console.WriteLine($"Company Name: {companyName}");
+                        Console.WriteLine($"Company Description: {companyDesc}");
+                        Console.WriteLine($"Start Month: {start}");
+                        Console.WriteLine($"End Month: {end}");
+                        Console.WriteLine($"Year: {year}");
+                        Submenus.GuestMenu();
+                        Console.ReadLine();
+                    }
+
+                        
+                    
+                }
+
+            }
 
             Console.ReadLine();
 
